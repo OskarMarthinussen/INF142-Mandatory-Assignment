@@ -8,13 +8,12 @@ import os
 # Get you password from .env file
 password = os.environ.get("mongoDB-password")
 username = "oskarmarthinussen"
-clusterName = "INF142-Mandatory-Assignment-Cluster"
-clusterName2 = "inf142-mandatory-assign"
+clusterName = "inf142-mandatory-assign"
 
 
 
 # Connect to you cluster
-client = MongoClient('mongodb+srv://' + username + ':' + password + '@' + clusterName2 + '.3ri60.mongodb.net/INF142-Mandatory-Assignment?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://' + username + ':' + password + '@' + clusterName + '.3ri60.mongodb.net/INF142-Mandatory-Assignment?retryWrites=true&w=majority')
 
 
 
