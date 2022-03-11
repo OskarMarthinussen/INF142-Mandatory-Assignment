@@ -46,7 +46,9 @@ def createUser(username: str, password: str):
             "_id": id,
             "username": username,
             "password": password,
-            "matchHistory": {}
+            "matchHistory": [{
+                "firstGame": "won"
+            }]
         }
         userCollection.insert_one(user)
         return True
@@ -54,6 +56,17 @@ def createUser(username: str, password: str):
         return False
 
 
+# Return user with this username
 def getUser(username: str):
     user = userCollection.find_one({"username": username})
     return user
+
+
+# Appen new game to players match history
+def updateMatchHistory(username: str, dict: dict):
+    matchHistory = getUser(username)["matchHistory"]
+    matchHistory.append(dict)
+    userCollection.update_one({"username": username},
+                              {"$set": {
+                                  "matchHistory": matchHistory
+                              }})

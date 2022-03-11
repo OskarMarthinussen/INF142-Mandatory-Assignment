@@ -15,6 +15,14 @@ def connectToServer():
         connectToServer()
 
 
+# Quee player up for game
+def queueUp():
+    print("You are queued up. Waiting for players.")
+    sock.sendall("In queue.".encode())
+    response = sock.recv(2048).decode()
+    print(response)
+
+
 # Get user input
 def getInput():
     username = input("Username: ")
@@ -22,7 +30,7 @@ def getInput():
     return username + ";" + password
 
 
-#
+# Register a player in tghe database
 def register():
     print("Regisration")
     account = getInput()
@@ -36,23 +44,12 @@ def register():
         login(3)
 
 
-def queueUp():
-    print("You are queued up. Waiting for players.")
-    sock.sendall("In queue.".encode())
-    print("waiting for game.")
-    response = sock.recv(2048).decode()
-    print("Game found.")
-    print(response)
-
-
+# Log player in
 def login(attempts: int):
     print("Login")
     account = getInput()
     sock.sendall(("login;" + account).encode())
     response = sock.recv(2048).decode()
-
-    print("login: " + response)
-
     if response == rm.message(2):  # If account does not exist
         print(rm.message(2))
         register()
