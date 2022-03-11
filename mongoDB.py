@@ -1,5 +1,4 @@
 import os
-from typing import Dict
 from pymongo import MongoClient
 from dotenv import load_dotenv
 
@@ -58,6 +57,3 @@ def createUser(username: str, password: str):
 def getUser(username: str):
     user = userCollection.find_one({"username": username})
     return user
-
-
-createUser("Oskar", "passord")
